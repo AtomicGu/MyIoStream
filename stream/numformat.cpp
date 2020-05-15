@@ -544,7 +544,7 @@ bool aton(const char* a_ps, int32_t* n_p, uint8_t radix)
 			}
 			ans *= radix;
 			ans -= temp;
-			if (ans < INT32_MIN)  // 判溢出
+			if (ans < (uint64_t)INT32_MIN)  // 判溢出
 				return false;
 			++a_ps;
 		}
