@@ -4,7 +4,7 @@
 // 简介：
 //		安全的数值-字符串转换函数库
 //		提供可选的优化预编译选项
-// 上次修改：2020-5-8 (v1.0.0)
+// 上次修改：2020-5-15 (v1.0.1)
 //==================================================================================================
 
 #include "numformat.h"
@@ -456,7 +456,7 @@ bool aton(const char* a_ps, uint32_t* n_p, uint8_t radix)
 	}
 
 END:
-	*n_p = ans;
+	*n_p = (uint32_t)ans;
 	return true;
 }
 
@@ -544,7 +544,7 @@ bool aton(const char* a_ps, int32_t* n_p, uint8_t radix)
 			}
 			ans *= radix;
 			ans -= temp;
-			if (ans < INT32_MIN)  // 判溢出
+			if (ans < (uint64_t)INT32_MIN)  // 判溢出
 				return false;
 			++a_ps;
 		}

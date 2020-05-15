@@ -2,7 +2,7 @@
 // 文件：CmdHelp.h
 // 作者：顾宇浩
 // 简介：帮助命令类
-// 上次修改：2020-5-15 (v1.0.0)
+// 上次修改：2020-5-15 (v1.0.1)
 //==================================================================================================
 
 #pragma once
@@ -69,7 +69,7 @@ inline const char* CmdHelp::info()
 	return R"(show help info
 
 Usage:
-  <$name> [cmdName]
+  <$cmd> [cmdName]
 
 If no command specified, show all avaliable commands.
 )";

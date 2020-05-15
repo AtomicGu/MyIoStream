@@ -2,7 +2,7 @@
 // 文件：char_stream.h
 // 作者：顾宇浩
 // 简介：字符流
-// 上次修改：2020-5-10 (v1.3.0)
+// 上次修改：2020-5-15 (v1.3.1)
 //==================================================================================================
 
 #pragma once
@@ -40,7 +40,7 @@ public:
 	 **********************************************************************************************/
 
 	 /* 基本输入 */
-	ICharStream& operator>>(char& c);
+	ICharStream& operator>>(char& c);  // 读入一个非空字符
 	ICharStream& operator>>(char* buf_p);  // 警告：不安全的函数
 	ICharStream& operator>>(uint32_t& n);
 	ICharStream& operator>>(int32_t& n);
@@ -308,12 +308,6 @@ private:
 //==================================================================================================
 // inlines: ICharStream
 //==================================================================================================
-
-inline ICharStream& ICharStream::operator>>(char& c)
-{
-	get((Byte*)&c);
-	return *this;
-}
 
 inline ICharStream& ICharStream::operator>>(char* buf_p)
 {
