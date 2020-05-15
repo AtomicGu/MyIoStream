@@ -1,19 +1,19 @@
-//==================================================================================================
-// ÎÄ¼ş£ºCmdHelp.cpp
-// ×÷Õß£º¹ËÓîºÆ
-// ¼ò½é£º°ïÖúÃüÁîÀà
-// ÉÏ´ÎĞŞ¸Ä£º2020-5-15 (v1.0.0)
+ï»¿//==================================================================================================
+// æ–‡ä»¶ï¼šCmdHelp.cpp
+// ä½œè€…ï¼šé¡¾å®‡æµ©
+// ç®€ä»‹ï¼šå¸®åŠ©å‘½ä»¤ç±»
+// ä¸Šæ¬¡ä¿®æ”¹ï¼š2020-5-15 (v1.0.0)
 //==================================================================================================
 
 #include "CmdHelp.h"
-#include "str_stream.h"
+#include "lib/stream/str_stream.h"
 
 
 
 bool CmdHelp::operator()(ICharStream& in, OCharStream out)
 {
 	auto cmd = in.get_full_section();
-	if (cmd.empty())  // Îª¿Õ´òÓ¡ËùÓĞ¿ÉÓÃÖ¸Áî
+	if (cmd.empty())  // ä¸ºç©ºæ‰“å°æ‰€æœ‰å¯ç”¨æŒ‡ä»¤
 	{
 		out << "All commands:\n\
   (specify command to show detailed info)\n\
@@ -21,7 +21,7 @@ bool CmdHelp::operator()(ICharStream& in, OCharStream out)
 		for (auto& i : _cmdMap)
 		{
 			out << "    " << i.first << " : ";
-			// Ö»´òÓ¡DebugCmd::infoµÄµÚÒ»ĞĞ
+			// åªæ‰“å°DebugCmd::infoçš„ç¬¬ä¸€è¡Œ
 			for (const char* p = i.second->info(); *p != '\n' && *p != '\0'; ++p)
 			{
 				out << *p;
@@ -30,7 +30,7 @@ bool CmdHelp::operator()(ICharStream& in, OCharStream out)
 		}
 		out << "\n  (Total:" << _cmdMap.size() << ")\n";
 	}
-	else  // ·ñÔòÏÔÊ¾¶ÔÓ¦Ö¸ÁîµÄĞÅÏ¢
+	else  // å¦åˆ™æ˜¾ç¤ºå¯¹åº”æŒ‡ä»¤çš„ä¿¡æ¯
 	{
 		auto i = _cmdMap.find(cmd);
 		if (i == _cmdMap.end())
