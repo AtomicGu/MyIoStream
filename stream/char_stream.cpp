@@ -2,7 +2,7 @@
 // 文件：str_stream.cpp
 // 作者：顾宇浩
 // 简介：字符流
-// 上次修改：2020-5-15 (v1.3.1)
+// 上次修改：2020-6-14 (v2.0.0)
 //==================================================================================================
 
 #include "char_stream.h"
@@ -76,7 +76,7 @@ ICharStream& ICharStream::operator>>(bool& b)
 	return *this;
 }
 
-size_t ICharStream::get_piece(char* buf_p, size_t bufSize, IsSeperator isSep)
+size_t ICharStream::get_section(char* buf_p, size_t bufSize, IsSeperator isSep)
 {
 	// 空缓冲情况处理
 	if (0 == bufSize)
@@ -108,9 +108,9 @@ size_t ICharStream::get_piece(char* buf_p, size_t bufSize, IsSeperator isSep)
 	return bufSize - left;
 }
 
-bool ICharStream::get_full_piece(char* buf_p, size_t bufSize, IsSeperator isSep)
+bool ICharStream::get_full_section(char* buf_p, size_t bufSize, IsSeperator isSep)
 {
-	size_t re = get_piece(buf_p, bufSize, isSep);
+	size_t re = get_section(buf_p, bufSize, isSep);
 	if (SIZE_MAX == re)
 		return false;  // 出错，错误状态在get_section中被设置。
 	if (bufSize == re)
@@ -127,7 +127,7 @@ bool ICharStream::get_full_piece(char* buf_p, size_t bufSize, IsSeperator isSep)
 	return true;
 }
 
-std::string ICharStream::get_full_piece(IsSeperator isSep)
+std::string ICharStream::get_full_section(IsSeperator isSep)
 {
 	// 略过开头连续的分隔符
 	Byte temp;
@@ -150,7 +150,7 @@ std::string ICharStream::get_full_piece(IsSeperator isSep)
 	return std::move(re);
 }
 
-bool ICharStream::skip_this_piece(IsSeperator isSep)
+bool ICharStream::skip_this_section(IsSeperator isSep)
 {
 	Byte temp;
 	do
@@ -162,7 +162,7 @@ bool ICharStream::skip_this_piece(IsSeperator isSep)
 	return true;
 }
 
-bool ICharStream::skip_next_piece(IsSeperator isSep)
+bool ICharStream::skip_next_section(IsSeperator isSep)
 {
 	// 略过开头连续的分隔符
 	Byte temp;
