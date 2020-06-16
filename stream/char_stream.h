@@ -71,7 +71,7 @@ public:
 	// 返回：成功返回true；失败返回false
 	// 说明：从流中取出一个字符，失败会自动置流状态位。
 	//==============================================================================================
-	virtual bool get(Byte* p) { return _in.get(p) ? true : _status = false; }
+	virtual bool get(Byte* p) { return _in.get(p) ? true : (_status = false) == true; }
 
 public:
 	/* 按段读取 */
@@ -212,7 +212,7 @@ public:
 	// 返回：成功返回true；失败返回false，同时置错误状态。
 	// 说明：往流中放入一个字符
 	//==============================================================================================
-	virtual bool put(Byte c) { return _out.put(c) ? true : _status = false; }
+	virtual bool put(Byte c) { return _out.put(c) ? true : (_status = false) == true; }
 
 	//==============================================================================================
 	// 函数：status
