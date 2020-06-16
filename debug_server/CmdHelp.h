@@ -2,11 +2,12 @@
 // 文件：CmdHelp.h
 // 作者：顾宇浩
 // 简介：帮助命令类
-// 上次修改：2020-5-15 (v1.0.1)
+// 上次修改：2020-6-16 (v2.0.1)
 //==================================================================================================
 
 #pragma once
-#include "debug_server.h"
+#include "DebugCmd.h"
+#include "DebugServer.h"
 
 
 
@@ -21,18 +22,11 @@ class CmdHelp :public DebugCmd
 {
 public:
 	//==============================================================================================
-	// 函数：构造（重载）
-	// 参数：ds - 调试服务器对象
-	// 说明：无
-	//==============================================================================================
-	CmdHelp(DebugServer& ds) :_cmdMap(ds.cmd_map()) {}
-
-	//==============================================================================================
-	// 函数：构造（重载）
+	// 函数：构造
 	// 参数：cmdMap - 调试指令表对象
 	// 说明：无
 	//==============================================================================================
-	CmdHelp(DebugCmdMap& cmdMap) :_cmdMap(cmdMap) {}
+	CmdHelp(DebugServer::CmdMap& cmdMap) :_cmdMap(cmdMap) {}
 
 public:
 	//==============================================================================================
@@ -55,7 +49,7 @@ public:
 	virtual bool operator()(ICharStream& in, OCharStream out);
 
 private:
-	DebugCmdMap& _cmdMap;
+	DebugServer::CmdMap& _cmdMap;
 };
 
 
@@ -69,7 +63,7 @@ inline const char* CmdHelp::info()
 	return R"(show help info
 
 Usage:
-  <$cmd> [cmdName]
+  <$> [cmdName]
 
 If no command specified, show all avaliable commands.
 )";
