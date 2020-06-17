@@ -4,7 +4,7 @@
 // 简介：
 //		安全的数值-字符串转换函数库
 //		提供可选的优化预编译选项
-// 上次修改：2020-5-15 (v1.0.1)
+// 上次修改：2020-6-17 (v1.0.2)
 //==================================================================================================
 
 #include "numformat.h"
@@ -280,7 +280,7 @@ char* ntoa(float n, char* buf_p, size_t bufSize, uint8_t radix)
 	if (sign)
 		n = -n;
 
-	// 规格化到[1/radix,radix)
+	// 规格化到[1,radix)
 	// 同时获得阶数
 	rank = 0;
 	if (n >= radix)
@@ -293,8 +293,7 @@ char* ntoa(float n, char* buf_p, size_t bufSize, uint8_t radix)
 	}
 	else
 	{
-		float lb = (float)1 / radix;
-		while (n < lb)
+		while (n < 1)
 		{
 			n *= radix;
 			--rank;

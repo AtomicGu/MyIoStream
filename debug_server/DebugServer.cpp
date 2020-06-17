@@ -2,7 +2,7 @@
 // 文件：DebugServer.cpp
 // 作者：顾宇浩
 // 简介：基于DebugIoStream类的调试服务器类
-// 上次修改：2020-6-16 (v1.0.0)
+// 上次修改：2020-6-17 (v1.0.1)
 //==================================================================================================
 
 #include "DebugServer.h"
@@ -54,7 +54,7 @@ DebugServer::ReturnCode DebugServer::main()
 		}
 
 		// 正常执行
-		_ios << "[ EXECUTING: \"" << cmdBuf << " \"]\n\n";
+		_ios << "[ EXECUTING: \"" << cmdBuf << "\"]\n\n";
 		if ((*cmdIter->second)(iss, _ios))
 		{
 			_ios << "\n[ CONTINUE ]\n\n";
